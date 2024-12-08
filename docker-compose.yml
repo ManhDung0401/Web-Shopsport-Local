@@ -1,0 +1,25 @@
+#version: "3"
+services:
+  backend:
+    build:
+      context: ./backend/shopsport
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80" # Backend runs on port 5000
+    volumes:
+      - ./backend/shopsport:/app
+    networks:
+      - shopnet
+
+  frontend:
+    build:
+      context: ./frontend/shopsport
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # Frontend runs on port 3000
+    networks:
+      - shopnet
+
+networks:
+  shopnet:
+    driver: bridge
